@@ -1,9 +1,12 @@
+<!doctype html>
+<html lang="ko">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="홍보팀">
 <meta name="theme-color" content="#EDF0F3">
 <title>서울필병원 홍보팀</title>
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;ri=AAAPyAAQY29tLmFwcGxlLlNhZmFyaQHFaHR0cHM6Ly9mYWN0Y2hhdC1wdWJsaWMuczMuYW1hem9uYXdzLmNvbS9wdXRzL3NhbmRib3gtb3V0cHV0cy8xYmExNDkzNC1mMDdlLTRhZjEtOGVmNC1mZDY2YWM4OGI4NzAvaW5kZXguaHRtbD9yZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWF0dGFjaG1lbnQlM0IlMjBmaWxlbmFtZSUzRCUyMmluZGV4Lmh0bWwlMjImWC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBMzc1QzRJVTZUN0xSRTRRUiUyRjIwMjYwNzE1JTJGYXAtbm9ydGhlYXN0LTIlMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwNzE1VDEyMzA1NFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JlgtQW16LVNpZ25hdHVyZT1kNmQ0YjJmYzUzNzQ2NzI0Nzc1ZjEzMjllYmIzMzc2N2U4MjNjNWRlMTE4NmIxZTAyNmExZGFhMDlmYjgxZDBk"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
@@ -16,7 +19,7 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 body{background:var(--paper);color:var(--ink);font-family:var(--kr);-webkit-font-smoothing:antialiased}
-.wrap{max-width:1160px;margin:0 auto;padding:env(safe-area-inset-top) 22px 150px}
+.wrap{max-width:1160px;margin:0 auto;padding:env(safe-area-inset-top) 22px 170px}
 
 .top{display:flex;justify-content:space-between;align-items:center;gap:14px;
   padding:20px 0 18px;border-bottom:1px solid var(--ink);flex-wrap:wrap}
@@ -32,7 +35,6 @@ body{background:var(--paper);color:var(--ink);font-family:var(--kr);-webkit-font
 .tbtn.go:hover:not(:disabled){background:var(--pacs);color:#fff;border-color:var(--pacs)}
 .tbtn.on{background:var(--amber);color:#fff;border-color:var(--amber)}
 
-/* ── 내비게이션 ── */
 .nav{display:flex;align-items:center;gap:14px;padding:18px 0 4px;flex-wrap:wrap;min-height:36px}
 .backbtn{display:inline-flex;align-items:center;gap:9px;font-family:var(--kr);font-size:14px;
   font-weight:500;letter-spacing:-.02em;padding:10px 18px 10px 14px;background:var(--ink);
@@ -93,7 +95,12 @@ body{background:var(--paper);color:var(--ink);font-family:var(--kr);-webkit-font
 .b.virt{border-style:dashed}
 .bwrap{display:flex;flex-direction:column}
 .bwrap .b{flex:1}
+.bwrap.dragging{opacity:.4}
 .ebar{display:flex;border:1px solid var(--amber);border-top:none;background:#FDF4E3}
+.ebar .hnd{flex:1.2;font-family:var(--mo);font-size:10px;letter-spacing:.03em;padding:8px 2px;
+  border-right:1px solid #F0DDBA;color:#8A5A08;cursor:grab;text-align:center;
+  touch-action:none;user-select:none;-webkit-user-select:none}
+.ebar .hnd:active{cursor:grabbing;background:var(--amber);color:#fff}
 .ebar button{flex:1;font-family:var(--mo);font-size:10px;letter-spacing:.03em;padding:8px 2px;
   border:none;border-right:1px solid #F0DDBA;background:none;color:#8A5A08;cursor:pointer;transition:.13s}
 .ebar button:last-child{border-right:none}
@@ -187,30 +194,30 @@ body{background:var(--paper);color:var(--ink);font-family:var(--kr);-webkit-font
   .it .x{opacity:1}
 }
 
-/* ── 꽃밭 & 시츄 ── */
-.meadow{position:fixed;left:0;right:0;bottom:0;height:74px;pointer-events:none;z-index:5;overflow:hidden}
+/* 꽃밭 & 시츄 */
+.meadow{position:fixed;left:0;right:0;bottom:0;height:112px;pointer-events:none;z-index:5;overflow:hidden}
 .meadow .ground{position:absolute;left:0;right:0;bottom:0;height:26px;
   background:linear-gradient(180deg,#CBE3C0,#B7D8AB)}
-.meadow .flower{position:absolute;bottom:18px;width:26px;height:34px}
+.meadow .flower{position:absolute;bottom:16px;width:30px;height:46px}
 .meadow .f1{left:27vw}.meadow .f2{left:61vw}
-.meadow .f3{left:12vw;transform:scale(.7);opacity:.85}
-.meadow .f4{left:45vw;transform:scale(.6);opacity:.8}
-.meadow .f5{left:82vw;transform:scale(.75);opacity:.85}
+.meadow .f3{left:12vw;transform:scale(.72);opacity:.9}
+.meadow .f4{left:45vw;transform:scale(.62);opacity:.85}
+.meadow .f5{left:82vw;transform:scale(.78);opacity:.9}
 .grassblade{position:absolute;bottom:20px;width:3px;height:13px;background:#9CC48B;border-radius:2px 2px 0 0}
 
-.pup{position:absolute;bottom:20px;left:0;width:104px;height:76px;
+.pup{position:absolute;bottom:18px;left:0;width:118px;height:92px;
   animation:stroll 34s linear infinite}
 @keyframes stroll{
-  0%   {transform:translateX(-130px)}
-  26%  {transform:translateX(calc(27vw - 78px))}
-  40%  {transform:translateX(calc(27vw - 78px))}   /* 꽃1 킁킁 */
-  62%  {transform:translateX(calc(61vw - 78px))}
-  76%  {transform:translateX(calc(61vw - 78px))}   /* 꽃2 킁킁 */
+  0%   {transform:translateX(-140px)}
+  26%  {transform:translateX(calc(27vw - 84px))}
+  40%  {transform:translateX(calc(27vw - 84px))}
+  62%  {transform:translateX(calc(61vw - 84px))}
+  76%  {transform:translateX(calc(61vw - 84px))}
   100% {transform:translateX(calc(100vw + 40px))}
 }
-.pup .bob{animation:bob .46s ease-in-out infinite;transform-origin:52px 60px}
+.pup .bob{animation:bob .46s ease-in-out infinite;transform-origin:60px 72px}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
-.pup .headg{animation:sniff 34s linear infinite;transform-origin:76px 42px}
+.pup .headg{animation:sniff 34s linear infinite;transform-origin:84px 52px}
 @keyframes sniff{
   0%,26%{transform:rotate(0deg)}
   28%{transform:rotate(26deg) translateY(3px)}
@@ -226,7 +233,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--kr);-webkit-font
   72%{transform:rotate(27deg) translateY(3px)}
   76%,100%{transform:rotate(0deg)}
 }
-.pup .tailg{animation:wag .38s ease-in-out infinite;transform-origin:16px 38px}
+.pup .tailg{animation:wag .38s ease-in-out infinite;transform-origin:22px 48px}
 @keyframes wag{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(9deg)}}
 .pup .leg{transform-origin:top center;animation:trot .46s ease-in-out infinite}
 .pup .l2{animation-delay:.23s}
@@ -251,7 +258,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--kr);-webkit-font
   </div>
   <div class="nav" id="nav"></div>
   <div class="editbar" id="editbar">
-    <p>편집 중 — 각 폴더 아래 버튼으로 순서(◀▶) · 이름 · 숨김을 바꿉니다. USB를 다시 불러와도 유지됩니다.</p>
+    <p>편집 중 — [⠿ 이동]을 잡고 끌어서 순서 변경 · 이름 · 숨김. USB를 다시 불러와도 유지됩니다.</p>
     <button id="e-hid">숨긴 항목</button>
     <button id="e-reset">전부 되돌리기</button>
   </div>
@@ -263,7 +270,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--kr);-webkit-font
 </div>
 
 <div class="lb" id="lb">
-  <button class="lbclose" id="lb-x">×</button>
+  <button class="lbclose" id="lb-x">&times;</button>
   <div class="stage" id="lb-stage"></div>
   <div class="lbbar" id="lb-bar"></div>
 </div>
@@ -275,71 +282,127 @@ body{background:var(--paper);color:var(--ink);font-family:var(--kr);-webkit-font
   <div class="grassblade" style="left:8vw"></div><div class="grassblade" style="left:19vw;height:10px"></div>
   <div class="grassblade" style="left:35vw"></div><div class="grassblade" style="left:52vw;height:11px"></div>
   <div class="grassblade" style="left:70vw"></div><div class="grassblade" style="left:90vw;height:10px"></div>
-  <svg class="flower f1" viewBox="0 0 26 34"><line x1="13" y1="14" x2="13" y2="34" stroke="#7FA96C" stroke-width="2.4"/><g fill="#F08FB4"><circle cx="13" cy="3" r="4"/><circle cx="19" cy="7.5" r="4"/><circle cx="17" cy="14.5" r="4"/><circle cx="9" cy="14.5" r="4"/><circle cx="7" cy="7.5" r="4"/></g><circle cx="13" cy="9" r="3.4" fill="#F2B705"/></svg>
-  <svg class="flower f2" viewBox="0 0 26 34"><line x1="13" y1="14" x2="13" y2="34" stroke="#7FA96C" stroke-width="2.4"/><g fill="#8FB7E8"><circle cx="13" cy="3" r="4"/><circle cx="19" cy="7.5" r="4"/><circle cx="17" cy="14.5" r="4"/><circle cx="9" cy="14.5" r="4"/><circle cx="7" cy="7.5" r="4"/></g><circle cx="13" cy="9" r="3.4" fill="#F2B705"/></svg>
-  <svg class="flower f3" viewBox="0 0 26 34"><line x1="13" y1="14" x2="13" y2="34" stroke="#7FA96C" stroke-width="2.4"/><g fill="#F0C4D8"><circle cx="13" cy="3" r="4"/><circle cx="19" cy="7.5" r="4"/><circle cx="17" cy="14.5" r="4"/><circle cx="9" cy="14.5" r="4"/><circle cx="7" cy="7.5" r="4"/></g><circle cx="13" cy="9" r="3.4" fill="#E8A33D"/></svg>
-  <svg class="flower f4" viewBox="0 0 26 34"><line x1="13" y1="14" x2="13" y2="34" stroke="#7FA96C" stroke-width="2.4"/><g fill="#FFFFFF"><circle cx="13" cy="3" r="4"/><circle cx="19" cy="7.5" r="4"/><circle cx="17" cy="14.5" r="4"/><circle cx="9" cy="14.5" r="4"/><circle cx="7" cy="7.5" r="4"/></g><circle cx="13" cy="9" r="3.4" fill="#F2B705"/></svg>
-  <svg class="flower f5" viewBox="0 0 26 34"><line x1="13" y1="14" x2="13" y2="34" stroke="#7FA96C" stroke-width="2.4"/><g fill="#F08FB4"><circle cx="13" cy="3" r="4"/><circle cx="19" cy="7.5" r="4"/><circle cx="17" cy="14.5" r="4"/><circle cx="9" cy="14.5" r="4"/><circle cx="7" cy="7.5" r="4"/></g><circle cx="13" cy="9" r="3.4" fill="#F2B705"/></svg>
+
+  <svg class="flower f1" viewBox="0 0 30 46">
+    <path d="M15 20 C10 30 11 40 15 46 C19 40 20 30 15 20" fill="#A8C79A"/>
+    <path d="M15 26 q-9 -2 -12 -7 q7 -1 12 4" fill="#9CC48B"/>
+    <g fill="#F6C7D9">
+      <path d="M15 20 C9 16 8 6 15 2 C22 6 21 16 15 20"/>
+      <path d="M15 20 C21 16 31 17 30 24 C24 27 17 25 15 20"/>
+      <path d="M15 20 C19 26 16 35 9 35 C6 29 10 22 15 20"/>
+      <path d="M15 20 C11 26 2 26 0 19 C5 15 12 15 15 20"/>
+    </g>
+    <circle cx="15" cy="20" r="4.4" fill="#F2CE7B"/>
+    <circle cx="13.6" cy="18.8" r="1.3" fill="#FFF" opacity=".55"/>
+  </svg>
+  <svg class="flower f2" viewBox="0 0 30 46">
+    <path d="M15 20 C10 30 11 40 15 46 C19 40 20 30 15 20" fill="#A8C79A"/>
+    <path d="M15 26 q9 -2 12 -7 q-7 -1 -12 4" fill="#9CC48B"/>
+    <g fill="#CDBBEC">
+      <path d="M15 20 C9 16 8 6 15 2 C22 6 21 16 15 20"/>
+      <path d="M15 20 C21 16 31 17 30 24 C24 27 17 25 15 20"/>
+      <path d="M15 20 C19 26 16 35 9 35 C6 29 10 22 15 20"/>
+      <path d="M15 20 C11 26 2 26 0 19 C5 15 12 15 15 20"/>
+    </g>
+    <circle cx="15" cy="20" r="4.4" fill="#F2CE7B"/>
+    <circle cx="13.6" cy="18.8" r="1.3" fill="#FFF" opacity=".55"/>
+  </svg>
+  <svg class="flower f3" viewBox="0 0 30 46">
+    <path d="M15 20 C10 30 11 40 15 46 C19 40 20 30 15 20" fill="#A8C79A"/>
+    <path d="M15 26 q-9 -2 -12 -7 q7 -1 12 4" fill="#9CC48B"/>
+    <g fill="#FBD9C6">
+      <path d="M15 20 C9 16 8 6 15 2 C22 6 21 16 15 20"/>
+      <path d="M15 20 C21 16 31 17 30 24 C24 27 17 25 15 20"/>
+      <path d="M15 20 C19 26 16 35 9 35 C6 29 10 22 15 20"/>
+      <path d="M15 20 C11 26 2 26 0 19 C5 15 12 15 15 20"/>
+    </g>
+    <circle cx="15" cy="20" r="4.4" fill="#E8B25C"/>
+    <circle cx="13.6" cy="18.8" r="1.3" fill="#FFF" opacity=".55"/>
+  </svg>
+  <svg class="flower f4" viewBox="0 0 30 46">
+    <path d="M15 20 C10 30 11 40 15 46 C19 40 20 30 15 20" fill="#A8C79A"/>
+    <path d="M15 26 q9 -2 12 -7 q-7 -1 -12 4" fill="#9CC48B"/>
+    <g fill="#FFFFFF">
+      <path d="M15 20 C9 16 8 6 15 2 C22 6 21 16 15 20"/>
+      <path d="M15 20 C21 16 31 17 30 24 C24 27 17 25 15 20"/>
+      <path d="M15 20 C19 26 16 35 9 35 C6 29 10 22 15 20"/>
+      <path d="M15 20 C11 26 2 26 0 19 C5 15 12 15 15 20"/>
+    </g>
+    <circle cx="15" cy="20" r="4.4" fill="#F2CE7B"/>
+    <circle cx="13.6" cy="18.8" r="1.3" fill="#FFF" opacity=".55"/>
+  </svg>
+  <svg class="flower f5" viewBox="0 0 30 46">
+    <path d="M15 20 C10 30 11 40 15 46 C19 40 20 30 15 20" fill="#A8C79A"/>
+    <path d="M15 26 q-9 -2 -12 -7 q7 -1 12 4" fill="#9CC48B"/>
+    <g fill="#F6C7D9">
+      <path d="M15 20 C9 16 8 6 15 2 C22 6 21 16 15 20"/>
+      <path d="M15 20 C21 16 31 17 30 24 C24 27 17 25 15 20"/>
+      <path d="M15 20 C19 26 16 35 9 35 C6 29 10 22 15 20"/>
+      <path d="M15 20 C11 26 2 26 0 19 C5 15 12 15 15 20"/>
+    </g>
+    <circle cx="15" cy="20" r="4.4" fill="#F2CE7B"/>
+    <circle cx="13.6" cy="18.8" r="1.3" fill="#FFF" opacity=".55"/>
+  </svg>
 
   <div class="pup">
-    <svg viewBox="0 0 104 76" width="104" height="76">
-      <!-- 냄새 표시 -->
-      <g class="scent" fill="none" stroke="#93A3B2" stroke-width="1.6" stroke-linecap="round">
-        <path d="M88 30 q3 -4 0 -8"/><path d="M94 32 q3 -4 0 -8"/>
+    <svg viewBox="0 0 118 92" width="118" height="92">
+      <g class="scent" fill="none" stroke="#C7BBD8" stroke-width="1.7" stroke-linecap="round">
+        <path d="M100 40 q3 -4 0 -8"/><path d="M106 42 q3 -4 0 -8"/>
       </g>
       <g class="bob">
-        <!-- 꼬리 (등 위로 말림) -->
         <g class="tailg">
-          <path d="M18 40 Q8 30 16 24 Q24 19 26 28" fill="#FFF" stroke="#E3D9CB" stroke-width="1.4"/>
-          <path d="M17 32 Q13 28 17 25" fill="#A9713C" opacity=".85"/>
+          <circle cx="27" cy="40" r="6.5" fill="#FFF9F0"/>
+          <circle cx="32" cy="35" r="6" fill="#FFF9F0"/>
+          <circle cx="23" cy="46" r="5.5" fill="#FFF9F0"/>
+          <circle cx="29" cy="41" r="4.8" fill="#C79A6B" opacity=".85"/>
         </g>
-        <!-- 뒷다리 -->
-        <g class="leg l2"><rect x="26" y="54" width="9" height="16" rx="4.5" fill="#FFF" stroke="#E3D9CB" stroke-width="1.3"/></g>
-        <!-- 몸통 -->
-        <ellipse cx="48" cy="47" rx="29" ry="17" fill="#FFF" stroke="#E3D9CB" stroke-width="1.5"/>
-        <!-- 등 얼룩 -->
-        <path d="M40 33 Q56 27 66 36 Q60 44 46 42 Q38 39 40 33" fill="#A9713C" opacity=".9"/>
-        <path d="M30 46 q6 -5 12 0 q-5 7 -12 0" fill="#C08A50" opacity=".65"/>
-        <!-- 앞다리 -->
-        <g class="leg"><rect x="58" y="54" width="9" height="16" rx="4.5" fill="#FFF" stroke="#E3D9CB" stroke-width="1.3"/></g>
-        <!-- 머리 -->
+        <g class="leg l2">
+          <rect x="37" y="62" width="10" height="18" rx="5" fill="#FBF2E6"/>
+          <ellipse cx="42" cy="79" rx="5.8" ry="3.5" fill="#FFF9F0"/>
+        </g>
+        <ellipse cx="57" cy="56" rx="29" ry="17" fill="#FFF9F0"/>
+        <circle cx="40" cy="62" r="9.5" fill="#FFF9F0"/>
+        <circle cx="54" cy="66" r="8.5" fill="#FFF9F0"/>
+        <circle cx="68" cy="64" r="8.5" fill="#FFF9F0"/>
+        <path d="M48 43 Q64 36 76 45 Q69 54 55 52 Q47 48 48 43" fill="#C79A6B"/>
+        <path d="M40 55 q6 -5 11 0 q-5 6 -11 0" fill="#DDB88E" opacity=".7"/>
+        <g class="leg">
+          <rect x="68" y="62" width="10" height="18" rx="5" fill="#FBF2E6"/>
+          <ellipse cx="73" cy="79" rx="5.8" ry="3.5" fill="#FFF9F0"/>
+        </g>
         <g class="headg">
-          <!-- 늘어진 귀 (뒤) -->
-          <path d="M62 26 Q56 24 55 36 Q56 46 63 44 Z" fill="#A9713C"/>
-          <circle cx="76" cy="34" r="16" fill="#FFF" stroke="#E3D9CB" stroke-width="1.5"/>
-          <!-- 눈 얼룩 -->
-          <path d="M80 20 Q92 22 90 34 Q84 38 79 32 Q76 25 80 20" fill="#A9713C" opacity=".9"/>
-          <!-- 늘어진 귀 (앞) -->
-          <path d="M64 22 Q57 20 56 33 Q57 44 65 42 Q62 32 64 22" fill="#8A5B30"/>
-          <!-- 정수리 털 -->
-          <path d="M70 19 q3 -5 7 -2 q3 -4 7 0" fill="none" stroke="#E3D9CB" stroke-width="2" stroke-linecap="round"/>
-          <!-- 눈 -->
-          <circle cx="73" cy="33" r="2.4" fill="#2B2018"/>
-          <circle cx="84" cy="31" r="2.4" fill="#2B2018"/>
-          <circle cx="73.8" cy="32.2" r=".8" fill="#FFF"/>
-          <circle cx="84.8" cy="30.2" r=".8" fill="#FFF"/>
-          <!-- 주둥이 -->
-          <ellipse cx="88" cy="40" rx="8" ry="6.4" fill="#FFF" stroke="#E3D9CB" stroke-width="1.2"/>
-          <ellipse cx="91" cy="37.5" rx="3" ry="2.4" fill="#3A2A1E"/>
-          <!-- 혀 -->
-          <path d="M88 44 q1.5 5 4 4 q2 -1 .5 -4.5" fill="#F08FB4" stroke="#DE6E9C" stroke-width=".8"/>
+          <path d="M73 30 Q62 33 64 51 Q66 63 76 60 Q71 45 73 30" fill="#9C6B44"/>
+          <circle cx="87" cy="43" r="17" fill="#FFF9F0"/>
+          <path d="M91 29 Q104 32 101 45 Q94 49 89 42 Q87 34 91 29" fill="#C79A6B"/>
+          <path d="M76 28 Q65 30 66 49 Q67 62 77 60 Q81 58 79 49 Q76 38 76 28" fill="#B07A4E"/>
+          <circle cx="73.5" cy="58" r="4.4" fill="#B07A4E"/>
+          <circle cx="70" cy="53" r="3.2" fill="#B07A4E" opacity=".85"/>
+          <circle cx="81" cy="27" r="4.6" fill="#FFF9F0"/>
+          <circle cx="88" cy="25" r="5" fill="#FFF9F0"/>
+          <circle cx="95" cy="28" r="4.2" fill="#FFF9F0"/>
+          <circle cx="79" cy="50" r="3" fill="#F7C4BE" opacity=".7"/>
+          <circle cx="83" cy="42" r="3.3" fill="#3A2B22"/>
+          <circle cx="94.5" cy="40" r="3.3" fill="#3A2B22"/>
+          <circle cx="84.2" cy="40.6" r="1.2" fill="#FFF"/>
+          <circle cx="95.7" cy="38.6" r="1.2" fill="#FFF"/>
+          <ellipse cx="99" cy="50" rx="8.4" ry="6.8" fill="#FFFDF8"/>
+          <ellipse cx="102" cy="47" rx="3.3" ry="2.7" fill="#6B4A38"/>
+          <circle cx="101" cy="46.2" r="1" fill="#FFF" opacity=".85"/>
+          <path d="M102 49.4 q0 2 -1.8 2.6" fill="none" stroke="#C9A98F" stroke-width="1" stroke-linecap="round"/>
+          <path d="M98.6 53.6 q1.6 5 4.2 4 q2 -1 .4 -4.6" fill="#F5A8BD"/>
         </g>
       </g>
     </svg>
   </div>
 </div>
+
 <input type="file" id="dpick" webkitdirectory directory multiple hidden>
+<input type="file" id="zpick" accept=".zip,application/zip" hidden>
 
 <script>
-/* ══════════════════════════════════════════════════════
-   STUDIO  — data.json 없음. USB 폴더를 읽어 구조를 만든다. (PC)
-   ARCHIVE — data.json 있음. 읽기 전용. (아이패드)
-
-   폴더 수정 내역(EDITS)은 "폴더 경로" 기준으로 저장한다.
-   → USB를 다시 불러와도 이름 변경 · 숨김 · 추가가 그대로 유지된다.
-══════════════════════════════════════════════════════ */
 let RM=false, TREE=null, path=[], BUSY=false, EM=false, ADD=false;
 const MEM=new Map();
+const ZIPMEM=new Map(); let ZIPPED=false;
 
 const ls=(k,d)=>{ try{ return JSON.parse(localStorage.getItem(k)) ?? d }catch{ return d } };
 let LINKS=ls("pr:links",{});
@@ -356,7 +419,6 @@ const kb=n=>n<1048576? Math.round(n/1024)+" KB" : (n/1048576).toFixed(1)+" MB";
 const toast=m=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");
   clearTimeout(t._);t._=setTimeout(()=>t.classList.remove("on"),2600)};
 
-/* ══ 트리 ══ */
 const mk=(n,p)=>({id:uid(),n,p,kids:[],items:[]});
 const pkey=n=>n.p.join("/");
 const ikey=(dir,it)=>pkey(dir)+"|"+it.t;
@@ -376,13 +438,55 @@ const kidsOf=n=>{
   });
   return ks;
 };
-function moveKid(parent,k,dir){
-  const ks=kidsOf(parent).map(x=>x.n);
-  const i=ks.indexOf(k.n), j=i+dir;
-  if(j<0||j>=ks.length)return;
-  [ks[i],ks[j]]=[ks[j],ks[i]];
-  EDITS.order[pkey(parent)]=ks;
-  saveEdits(); route();
+function bindDrag(cur,kids){
+  const g=document.getElementById("fgrid"); if(!g)return;
+  const commit=()=>{
+    const names=[...g.querySelectorAll(".bwrap[data-w]")]
+      .map(w=>kids.find(x=>x.id===w.dataset.w)?.n).filter(Boolean);
+    EDITS.order[pkey(cur)]=names; saveEdits(); route();
+  };
+  let dragEl=null;
+  g.querySelectorAll(".bwrap[data-w]").forEach(w=>{
+    w.addEventListener("dragstart",e=>{ dragEl=w; w.classList.add("dragging");
+      e.dataTransfer.effectAllowed="move"; e.dataTransfer.setData("text/plain","") });
+    w.addEventListener("dragend",()=>{ if(!dragEl)return;
+      dragEl.classList.remove("dragging"); dragEl=null; commit() });
+  });
+  g.addEventListener("dragover",e=>{
+    if(!dragEl)return; e.preventDefault();
+    const t=e.target.closest(".bwrap[data-w]");
+    if(!t||t===dragEl)return;
+    const r=t.getBoundingClientRect();
+    const after=(e.clientY>r.bottom) || (e.clientY>=r.top&&(e.clientX-r.left)/r.width>.5);
+    g.insertBefore(dragEl, after?t.nextSibling:t);
+  });
+  g.addEventListener("drop",e=>e.preventDefault());
+
+  let tEl=null, ghost=null, ox=0, oy=0;
+  g.querySelectorAll(".hnd").forEach(h=>h.addEventListener("touchstart",e=>{
+    tEl=h.closest(".bwrap"); const t=e.touches[0], r=tEl.getBoundingClientRect();
+    ox=t.clientX-r.left; oy=t.clientY-r.top;
+    ghost=tEl.cloneNode(true);
+    Object.assign(ghost.style,{position:"fixed",left:r.left+"px",top:r.top+"px",
+      width:r.width+"px",pointerEvents:"none",opacity:".85",zIndex:80,
+      boxShadow:"0 10px 26px rgba(19,32,46,.25)"});
+    document.body.appendChild(ghost);
+    tEl.classList.add("dragging");
+  },{passive:true}));
+  g.addEventListener("touchmove",e=>{
+    if(!tEl)return;
+    const t=e.touches[0];
+    ghost.style.left=(t.clientX-ox)+"px"; ghost.style.top=(t.clientY-oy)+"px";
+    const el=document.elementFromPoint(t.clientX,t.clientY)?.closest(".bwrap[data-w]");
+    if(el&&el!==tEl){
+      const r=el.getBoundingClientRect();
+      g.insertBefore(tEl,(t.clientX-r.left)/r.width>.5?el.nextSibling:el);
+    }
+    e.preventDefault();
+  },{passive:false});
+  const endT=()=>{ if(!tEl)return; ghost?.remove(); ghost=null;
+    tEl.classList.remove("dragging"); tEl=null; commit() };
+  g.addEventListener("touchend",endT); g.addEventListener("touchcancel",endT);
 }
 const itemsOf=n=>n.items.filter(it=>EM||!isHidIt(n,it));
 
@@ -404,7 +508,6 @@ function sortNode(n){
   n.kids.forEach(sortNode);
 }
 
-/* ══ 이미지 · PDF ══ */
 const bu=b=>URL.createObjectURL(b);
 const loadImg=f=>new Promise((ok,no)=>{const u=bu(f),im=new Image();
   im.onload=()=>{URL.revokeObjectURL(u);ok(im)}; im.onerror=()=>{URL.revokeObjectURL(u);no(0)}; im.src=u});
@@ -439,7 +542,6 @@ async function paint(doc,n,maxW){
   return cv;
 }
 
-/* ══ USB 불러오기 ══ */
 document.getElementById("dpick").onchange=e=>{ const f=[...e.target.files]; e.target.value=""; ingest(f) };
 async function ingest(files){
   if(!files.length||BUSY)return;
@@ -450,7 +552,7 @@ async function ingest(files){
   const merge = ADD && TREE;
   let root, base;
   if(merge){
-    base = path.length? at(path) : TREE;   // 지금 열려 있는 폴더 안으로 합친다
+    base = path.length? at(path) : TREE;
     root = TREE;
     showProg(true);
   }else{
@@ -463,8 +565,7 @@ async function ingest(files){
   let done=0, skipped=0, dup=0;
   for(const f of good){
     const segs=f.webkitRelativePath.split("/");
-    if(!merge) segs.shift();              // 전체 교체: 고른 폴더 이름은 버린다
-                                          // 추가: 고른 폴더 이름을 그대로 살린다
+    if(!merge) segs.shift();
     const name=segs.pop();
     const dir=walk(base,segs);
     const t0=name.replace(/\.(pdf|[^.]+)$/i,"");
@@ -476,11 +577,11 @@ async function ingest(files){
         const thumb=await fit(im,560,.70);
         const full=(f.size<420*1024 && /\.jpe?g$/i.test(name)) ? f : await fit(im,1800,.85);
         MEM.set(id,{thumb,full});
-        dir.items.push({id,k:"img",fx:"jpg",t:name.replace(/\.[^.]+$/,""),s:`${im.width}×${im.height} · ${kb(f.size)}`});
+        dir.items.push({id,k:"img",fx:"jpg",t:name.replace(/\.[^.]+$/,""),s:`${im.width}\u00d7${im.height} \u00b7 ${kb(f.size)}`});
       }else if(PDFX.test(name)){
         const doc=await openPdf(f);
         MEM.set(id,{thumb:await toBlob(await paint(doc,1,560),.70),full:f});
-        dir.items.push({id,k:"pdf",fx:"pdf",t:name.replace(/\.pdf$/i,""),pages:doc.numPages,s:`${doc.numPages}p · ${kb(f.size)}`});
+        dir.items.push({id,k:"pdf",fx:"pdf",t:name.replace(/\.pdf$/i,""),pages:doc.numPages,s:`${doc.numPages}p \u00b7 ${kb(f.size)}`});
       }else if(f.size<25*1048576){
         MEM.set(id,{full:f});
         const ext=(name.split(".").pop()||"file").slice(0,5);
@@ -493,7 +594,7 @@ async function ingest(files){
   sortNode(root); TREE=root; BUSY=false;
   const wasAdd=ADD; ADD=false;
   showProg(false); topbar(); route();
-  toast(`${wasAdd?"추가 ":""}${done-skipped-dup}개${dup?` · 중복 ${dup}개 제외`:""}${skipped?` · ${skipped}개 건너뜀`:""}`);
+  toast(`${wasAdd?"추가 ":""}${done-skipped-dup}개${dup?` \u00b7 중복 ${dup}개 제외`:""}${skipped?` \u00b7 ${skipped}개 건너뜀`:""}`);
 }
 const showProg=on=>document.querySelector(".prog")?.classList.toggle("on",on);
 function prog(a,b,nm){
@@ -503,11 +604,38 @@ function prog(a,b,nm){
   p.querySelector(".ptxt span").textContent=`${a} / ${b}`;
 }
 
-/* ══ 상단 · 내비 ══ */
+document.getElementById("zpick").onchange=e=>{const f=e.target.files[0];e.target.value="";if(f)openZip(f)};
+async function openZip(file){
+  if(BUSY)return; BUSY=true; toast("ZIP 여는 중\u2026");
+  try{
+    if(!window.JSZip) await new Promise((ok,no)=>{const s=document.createElement("script");
+      s.src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
+      s.onload=ok;s.onerror=no;document.head.appendChild(s)});
+    const zip=await JSZip.loadAsync(file);
+    let dj=null;
+    zip.forEach((p,o)=>{if(!dj&&/(^|\/)data\.json$/i.test(p)&&!o.dir)dj=o});
+    if(!dj){toast("data.json이 없는 ZIP입니다");BUSY=false;return}
+    const base=dj.name.replace(/data\.json$/i,"");
+    const d=JSON.parse(await dj.async("string"));
+    ZIPMEM.forEach(u=>URL.revokeObjectURL(u)); ZIPMEM.clear();
+    const jobs=[];
+    zip.forEach((p,o)=>{
+      if(o.dir)return;
+      const m=p.replace(base,"");
+      if(/^assets\//i.test(m)) jobs.push(o.async("blob").then(b=>ZIPMEM.set(m,URL.createObjectURL(b))));
+    });
+    await Promise.all(jobs);
+    TREE=d.tree; LINKS=d.links||{}; RM=true; ZIPPED=true; path=[];
+    EDITS={rename:{},hidden:[],hiddenItems:[],extra:{},order:{}};
+    topbar(); route(); toast("아카이브 열림 \u00b7 읽기 전용");
+  }catch(err){console.error(err);toast("ZIP 열기 실패")}
+  BUSY=false;
+}
+
 function topbar(){
-  document.getElementById("mode").textContent=RM?"ARCHIVE":"STUDIO";
+  document.getElementById("mode").textContent=(RM?"ARCHIVE":"STUDIO");
   const t=document.getElementById("tools");
-  if(RM){ t.innerHTML=""; return }
+  if(RM){ t.innerHTML=""; document.getElementById("editbar").classList.remove("on"); return }
   t.innerHTML=`<button class="tbtn" id="t-load">${TREE?"다시 불러오기":"USB 폴더"}</button>
     ${TREE?`<button class="tbtn" id="t-add">+ 폴더 추가</button>`:""}
     <button class="tbtn ${EM?"on":""}" id="t-edit" ${TREE?"":"disabled"}>${EM?"편집 끝":"편집"}</button>
@@ -542,7 +670,7 @@ function nav(){
     const n=at(path.slice(0,i+1));
     c+=`<i>/</i>`+(i===path.length-1?`<b>${esc(dn(n))}</b>`:`<button data-go="${i+1}">${esc(dn(n))}</button>`);
   });
-  el.innerHTML=`<button class="backbtn" id="back"><span class="ar">←</span>뒤로</button>
+  el.innerHTML=`<button class="backbtn" id="back"><span class="ar">\u2190</span>뒤로</button>
     <div class="crumb">${c}</div>`;
   document.getElementById("back").onclick=()=>{ path=up; route() };
   el.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{ path=path.slice(0,+b.dataset.go); route() });
@@ -556,34 +684,35 @@ function start(){
       <p>폴더 구조를 그대로 읽어서 화면을 만듭니다.<br>
          이미지는 미리보기로, PDF는 넘겨볼 수 있게 바뀝니다.</p>
       <div class="pick">
-        <button class="bigbtn" id="s-pick">USB 폴더 선택</button>
-        <div class="hint">파일은 어디에도 업로드되지 않습니다 · 이 컴퓨터 안에서만 처리됩니다<br>
-          Chrome 또는 Edge에서 열어주세요</div>
+        <button class="bigbtn" id="s-pick">USB 폴더 선택 (PC)</button>
+        <button class="bigbtn" id="s-zip" style="background:var(--pacs-d);border-color:var(--pacs-d)">아이패드 \u00b7 USB의 ZIP 열기</button>
+        <div class="hint">파일은 어디에도 업로드되지 않습니다 \u00b7 이 기기 안에서만 처리됩니다<br>
+          폴더 선택은 Chrome/Edge (PC) \u00b7 아이패드/폰은 ZIP 열기</div>
       </div>
       <div class="prog"><div class="pbar"><i></i></div><div class="ptxt"><b></b><span></span></div></div>
     </div>`;
   document.getElementById("s-pick").onclick=()=>document.getElementById("dpick").click();
+  document.getElementById("s-zip").onclick=()=>document.getElementById("zpick").click();
 }
 
-/* ══ 렌더 ══ */
 function render(){
   const cur = path.length? at(path) : TREE;
   const isRoot = !path.length;
   const kids = kidsOf(cur);
   document.getElementById("view").innerHTML=`
     ${isRoot?"":`<div class="dtop"><h2>${esc(dn(cur))}</h2>
-      <div class="tools"><button class="tbtn" id="a-l">+ 링크</button></div></div>`}
+      ${RM?"":`<div class="tools"><button class="tbtn" id="a-l">+ 링크</button></div>`}</div>`}
     ${(kids.length||EM)?`<div class="grp">${isRoot?"":`<div class="glab">하위 ${kids.length}</div>`}
-      <div class="grid ${EM?"editing":""}">${kids.map((k,ki)=>{
+      <div class="grid ${EM?"editing":""}" id="fgrid">${kids.map(k=>{
         const n=deepCount(k), hid=isHid(k);
-        return `<div class="bwrap"><button class="b ${k.virt?"virt":""}" data-k="${k.id}" style="${hid?"opacity:.42":""}">
+        return `<div class="bwrap" data-w="${k.id}" ${EM?'draggable="true"':""}>
+        <button class="b ${k.virt?"virt":""}" data-k="${k.id}" style="${hid?"opacity:.42":""}">
           ${!EM&&k.kids.length?`<span class="sub">${k.kids.length}</span>`:""}
           <div class="bn">${esc(dn(k))}</div>
           <div class="bc ${n?"has":""}">${hid?"숨김":(n?n+" 개":"비어 있음")}</div>
         </button>
         ${EM?`<div class="ebar">
-          <button data-mv="${k.id}" data-d="-1" title="앞으로" ${ki===0?"disabled":""}>◀</button>
-          <button data-mv="${k.id}" data-d="1" title="뒤로" ${ki===kids.length-1?"disabled":""}>▶</button>
+          <span class="hnd" title="끌어서 순서 이동">\u283f 이동</span>
           <button data-rn="${k.id}">이름</button>
           <button class="rm" data-hd="${k.id}">${hid?"보이기":(k.virt?"삭제":"숨김")}</button>
         </div>`:""}</div>`}).join("")}
@@ -591,13 +720,10 @@ function render(){
       </div></div>`:""}
     <div class="items" id="items"></div>`;
 
-  if(!isRoot) document.getElementById("a-l").onclick=()=>addLink(cur);
+  if(!isRoot&&!RM) document.getElementById("a-l").onclick=()=>addLink(cur);
   const v=document.getElementById("view");
   v.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{ path=[...path,b.dataset.k]; route() });
-  v.querySelectorAll("[data-mv]").forEach(b=>b.onclick=()=>{
-    const k=kids.find(x=>x.id===b.dataset.mv);
-    moveKid(cur,k,+b.dataset.d);
-  });
+  if(EM) bindDrag(cur,kids);
   v.querySelectorAll("[data-rn]").forEach(b=>b.onclick=()=>{
     const k=kids.find(x=>x.id===b.dataset.rn);
     form("이름 변경",[{k:"n",l:"표시할 이름",v:dn(k)}],x=>{
@@ -632,9 +758,9 @@ function items(cur){
   el.innerHTML=list.map(it=>{
     const hid=it.k!=="link"&&isHidIt(cur,it);
     return `<div class="it" style="${hid?"opacity:.42":""}">
-    ${!RM&&(EM||it.k==="link")?`<button class="x" data-x="${it.id}" data-lk="${it.k==="link"?1:0}">${hid?"↺":"×"}</button>`:""}
-    ${it.k==="pdf"?`<span class="badge">PDF · ${it.pages}p</span>`:""}
-    ${it.k==="link" ? `<div class="fico" style="color:var(--pacs-d)">LINK ↗</div>`
+    ${!RM&&(EM||it.k==="link")?`<button class="x" data-x="${it.id}" data-lk="${it.k==="link"?1:0}">${hid?"\u21ba":"\u00d7"}</button>`:""}
+    ${it.k==="pdf"?`<span class="badge">PDF \u00b7 ${it.pages}p</span>`:""}
+    ${it.k==="link" ? `<div class="fico" style="color:var(--pacs-d)">LINK \u2197</div>`
       : it.k==="file" ? `<div class="fico" data-dl="${it.id}">${esc((it.ext||"FILE").toUpperCase())}</div>`
       : `<img class="th" data-v="${it.id}" src="${thumbURL(it.id)}" alt="" loading="lazy">`}
     <div class="meta">
@@ -659,11 +785,13 @@ function items(cur){
 }
 
 function thumbURL(id){
+  if(ZIPPED) return ZIPMEM.get(`assets/t_${id}.jpg`)||"";
   if(RM) return `assets/t_${id}.jpg`;
   const m=MEM.get(id); if(!m?.thumb) return "";
   return m.tu ||= bu(m.thumb);
 }
 function fullURL(id,fx){
+  if(ZIPPED) return ZIPMEM.get(`assets/f_${id}.${fx}`)||"";
   if(RM) return `assets/f_${id}.${fx}`;
   const m=MEM.get(id); if(!m?.full) return "";
   return m.fu ||= bu(m.full);
@@ -674,7 +802,6 @@ function grab(id,list){
   a.target="_blank"; a.rel="noopener"; a.click();
 }
 
-/* ══ 숨긴 항목 ══ */
 function hiddenPanel(){
   const rows=[
     ...EDITS.hidden.map(k=>({k,label:k.split("/").pop(),sub:k,type:"folder"})),
@@ -683,7 +810,7 @@ function hiddenPanel(){
   document.getElementById("m-title").textContent=`숨긴 항목 ${rows.length}개`;
   document.getElementById("m-body").innerHTML = rows.length
     ? `<div class="hidlist">${rows.map(r=>`<div class="hidrow">
-        <span>${esc(r.label)}<em>${r.type==="folder"?"폴더":"파일"} · ${esc(r.sub)}</em></span>
+        <span>${esc(r.label)}<em>${r.type==="folder"?"폴더":"파일"} \u00b7 ${esc(r.sub)}</em></span>
         <button data-r="${esc(r.k)}" data-t="${r.type}">되돌리기</button></div>`).join("")}</div>`
     : `<div class="guide">숨긴 항목이 없습니다.</div>`;
   document.getElementById("m-row").innerHTML=`<button class="mbtn pri" id="m-no">닫기</button>`;
@@ -697,27 +824,26 @@ function hiddenPanel(){
   document.getElementById("mask").classList.add("on");
 }
 
-/* ══ 뷰어 ══ */
 let vp={};
 async function view(id,list){
   const it=list.find(x=>x.id===id);
   const lb=document.getElementById("lb"), st=document.getElementById("lb-stage"), bar=document.getElementById("lb-bar");
   lb.classList.add("on");
-  st.innerHTML=`<div style="color:#8FA3B4;font-family:var(--mo);font-size:11px">불러오는 중…</div>`; bar.innerHTML="";
+  st.innerHTML=`<div style="color:#8FA3B4;font-family:var(--mo);font-size:11px">불러오는 중\u2026</div>`; bar.innerHTML="";
   try{
     if(it.k==="img"){
       st.innerHTML=""; const im=new Image(); im.src=fullURL(id,"jpg"); st.appendChild(im);
       const sib=list.filter(x=>x.k==="img"), i=sib.findIndex(x=>x.id===id);
       vp={sib,i,list};
-      bar.innerHTML=`<button id="pv" ${i<=0?"disabled":""}>← 이전</button>
-        <span>${esc(it.t)} · ${i+1}/${sib.length}</span>
-        <button id="nx" ${i>=sib.length-1?"disabled":""}>다음 →</button>`;
+      bar.innerHTML=`<button id="pv" ${i<=0?"disabled":""}>\u2190 이전</button>
+        <span>${esc(it.t)} \u00b7 ${i+1}/${sib.length}</span>
+        <button id="nx" ${i>=sib.length-1?"disabled":""}>다음 \u2192</button>`;
       document.getElementById("pv").onclick=()=>view(sib[i-1].id,list);
       document.getElementById("nx").onclick=()=>view(sib[i+1].id,list);
       return;
     }
     if(it.k==="pdf"){
-      const src = RM? fullURL(id,"pdf") : MEM.get(id).full;
+      const src = (RM||ZIPPED)? fullURL(id,"pdf") : MEM.get(id).full;
       const doc=await openPdf(src);
       vp={doc,n:1,total:doc.numPages}; await page(1);
     }
@@ -729,8 +855,8 @@ async function page(n){
   vp.n=Math.min(Math.max(1,n),vp.total);
   const cv=await paint(vp.doc,vp.n,1500);
   st.innerHTML=""; st.appendChild(cv);
-  bar.innerHTML=`<button id="pv" ${vp.n<=1?"disabled":""}>← 이전</button>
-    <span>${vp.n} / ${vp.total}</span><button id="nx" ${vp.n>=vp.total?"disabled":""}>다음 →</button>`;
+  bar.innerHTML=`<button id="pv" ${vp.n<=1?"disabled":""}>\u2190 이전</button>
+    <span>${vp.n} / ${vp.total}</span><button id="nx" ${vp.n>=vp.total?"disabled":""}>다음 \u2192</button>`;
   document.getElementById("pv").onclick=()=>page(vp.n-1);
   document.getElementById("nx").onclick=()=>page(vp.n+1);
 }
@@ -738,7 +864,6 @@ const closeLb=()=>{document.getElementById("lb").classList.remove("on");vp={}};
 document.getElementById("lb-x").onclick=closeLb;
 document.getElementById("lb").onclick=e=>{if(e.target.id==="lb")closeLb()};
 
-/* ══ 링크 · 모달 ══ */
 function addLink(cur){
   form("링크 추가",[{k:"t",l:"제목",p:"예: 무릎 재활 운동법"},{k:"u",l:"URL",p:"https://"}],v=>{
     if(!v.u.trim())return;
@@ -763,25 +888,27 @@ const closeM=()=>document.getElementById("mask").classList.remove("on");
 function help(){
   document.getElementById("m-title").textContent="아이패드에 올리는 법";
   document.getElementById("m-body").innerHTML=`<div class="guide"><ol>
-    <li><b>USB 폴더</b>를 눌러 자료가 든 폴더를 통째로 고른다. 하위 폴더까지 알아서 읽는다.</li>
+    <li><b>USB 폴더</b>(PC)를 눌러 자료가 든 폴더를 통째로 고른다. 하위 폴더까지 알아서 읽는다.</li>
     <li>다른 폴더를 더 넣고 싶으면 넣을 위치를 연 다음 <b>+ 폴더 추가</b>.
         기존 것은 그대로 두고 합쳐진다. <code>다시 불러오기</code>는 전부 지우고 새로 읽으니 주의.</li>
     <li><b>편집</b>에서 폴더 이름을 다듬거나, 안 보여줄 것을 숨긴다. (원본 USB는 건드리지 않는다)</li>
-    <li><b>사이트 만들기</b> → ZIP 파일이 받아진다.</li>
-    <li>ZIP을 풀면 <code>index.html</code> · <code>data.json</code> · <code>assets/</code> 가 나온다.</li>
-    <li><a href="https://app.netlify.com/drop" target="_blank" rel="noopener">app.netlify.com/drop</a> 에
-        풀어놓은 <b>폴더를 통째로 끌어다 놓는다.</b> 로그인도 필요 없다.</li>
-    <li>바로 주소가 생긴다. 아이패드 사파리로 열고 → <b>공유 → 홈 화면에 추가</b>.</li>
+    <li><b>사이트 만들기</b> \u2192 ZIP 파일이 받아진다.</li>
+    <li><b>[가장 간단]</b> 그 ZIP을 USB-C에 넣어 아이패드/폰에 꽂고 → 이 화면에서
+        <b>"아이패드 \u00b7 USB의 ZIP 열기"</b> → 파일앱에서 그 ZIP을 고르면 바로 읽기전용으로 뜬다.
+        서버도, 인터넷도, 홈화면 등록도 필요 없다.</li>
+    <li><b>[홈화면 앱으로 쓰기]</b> ZIP을 풀면 <code>index.html</code> \u00b7 <code>data.json</code> \u00b7 <code>assets/</code> 가 나온다.
+        <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">app.netlify.com/drop</a> 에
+        풀어놓은 <b>폴더를 통째로 끌어다 놓으면</b> 주소가 생긴다. 아이패드 사파리로 열고 → <b>공유 \u2192 홈 화면에 추가</b>.</li>
   </ol>
   <p style="margin-top:16px;color:var(--ink3);font-size:12px;line-height:1.85">
-  편집한 내용은 폴더 경로 기준으로 기억되므로 USB를 다시 불러와도 유지된다.<br>
-  아이패드에서는 자동으로 읽기 전용(ARCHIVE)이 되니 발표 중에 건드릴 게 없다.</p></div>`;
+  아이폰\u00b7아이패드 사파리는 "폴더 통째 선택"을 지원하지 않아 USB-C를 꽂아도 폴더 방식은 안 된다.
+  그래서 아이패드에서는 <b>ZIP 열기</b>를 쓴다.<br>
+  편집한 내용은 폴더 경로 기준으로 기억되므로 USB를 다시 불러와도 유지된다.</p></div>`;
   document.getElementById("m-row").innerHTML=`<button class="mbtn pri" id="m-no">닫기</button>`;
   document.getElementById("m-no").onclick=closeM;
   document.getElementById("mask").classList.add("on");
 }
 
-/* ══ 사이트 만들기 ══ */
 function bake(n){
   if(isHid(n)) return null;
   let raw=[...n.kids,...extraOf(n)];
@@ -796,7 +923,7 @@ function bake(n){
 function collectIds(n,set){ n.items.forEach(it=>set.add(it.id)); n.kids.forEach(k=>collectIds(k,set)); return set }
 async function publish(){
   if(!TREE||BUSY)return;
-  BUSY=true; toast("패키지 만드는 중…");
+  BUSY=true; toast("패키지 만드는 중\u2026");
   try{
     if(!window.JSZip) await new Promise((ok,no)=>{const s=document.createElement("script");
       s.src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
@@ -819,7 +946,7 @@ async function publish(){
     a.href=URL.createObjectURL(blob);
     a.download=`홍보팀_사이트_${new Date().toISOString().slice(0,10)}.zip`;
     a.click();
-    toast(`완료 · ${n}개 · ${kb(blob.size)}`);
+    toast(`완료 \u00b7 ${n}개 \u00b7 ${kb(blob.size)}`);
   }catch(e){ console.error(e); toast("패키지 생성 실패") }
   BUSY=false;
 }
@@ -829,7 +956,6 @@ function findItem(n,id){
   return null;
 }
 
-/* ══ 부팅 ══ */
 document.addEventListener("keydown",e=>{
   if(e.key==="Escape"){ closeLb(); closeM() }
   const lbOn=document.getElementById("lb").classList.contains("on");
@@ -848,8 +974,9 @@ document.addEventListener("keydown",e=>{
     const r=await fetch("./data.json",{cache:"no-store"});
     if(r.ok){ const d=await r.json();
       if(d.tree){ TREE=d.tree; RM=true; LINKS=d.links||{};
-        EDITS={rename:{},hidden:[],hiddenItems:[],extra:{}} } }
+        EDITS={rename:{},hidden:[],hiddenItems:[],extra:{},order:{}} } }
   }catch{}
   topbar(); route();
 })();
 </script>
+</html>
